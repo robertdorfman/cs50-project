@@ -7,10 +7,13 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from flask_sslify import SSLify
+
 from helpers import apology, login_required, lookup
 
 # Configure application
 app = Flask(__name__)
+sslify = SSLify(app)
 
 
 # Ensure templates are auto-reloaded
