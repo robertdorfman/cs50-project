@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <form action="/register" method="post" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <br>
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" required>
+            <div class="invalid-feedback">
+            Please choose a unique and valid username.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <br>
+            <input class="form-control" name="password" placeholder="Password" type="password" required>
+            <div class="invalid-feedback">
+            Please choose a password.
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Confirm Password" type="password" required>
+            <div class="invalid-feedback">
+            Please confirm your password.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">First and Last Name</label>
+            <br>
+            <input class="form-control" name="name" placeholder="First and Last Name" type="text" required>
+            <div class="invalid-feedback">
+            Please input your first and last name.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <br>
+            <input class="form-control" name="dob" type="date" required>
+            <div class="invalid-feedback">
+            Please input your Date of Birth.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="height">Height (inches)</label>
+            <br>
+            <input class="form-control" name="height" placeholder="Height (inches)" type="text" required>
+            <div class="invalid-feedback">
+            Please inout your height.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight (Pounds)</label>
+            <br>
+            <input class="form-control" name="weight" placeholder="Weight (lbs.)" type="text" required>
+            <div class="invalid-feedback">
+            Please input your weight.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <script>
+        document.querySelector('form').onsubmit = function(e) {
+            e.preventDefault();
+            $.get('/check', {username: document.querySelector('input[name=username]').value}, function(data) {
+                if (data) {
+                    document.querySelector('form').submit();
+                }
+                else {
+                    alert('Username is not available');
+                }
+            });
+        };
+    </script>
+
+{% endblock %}
