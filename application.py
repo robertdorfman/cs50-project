@@ -12,6 +12,7 @@ from helpers import apology, login_required, lookup
 # Configure application
 app = Flask(__name__)
 
+
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -33,6 +34,12 @@ Session(app)
 # Configure website to use database
 db = SQL("sqlite:///cirqitous.db")
 
+@app.route("/")
+@login_required
+def index():
+
+     return render_template("distance.html")
+
 @app.route("/distance", methods=["GET", "POST"])
 @login_required
 def distance():
@@ -46,23 +53,26 @@ def distance():
             return apology("missing distance")
 
         # Correct this to make sure they enter a postive value
-        elif not request.form.get("distance"):
-            return apology("invalid distance")
+        #elif not request.form.get("measurement"):
+            #return apology("please choose a measurement type")
 
         #The following restrict posting:
         #.isfloat() at the end of request.form.get("distance")?
         #distance = float(request.form.get("distance"))?
 
-        # Either enter or find current location
-        ### TODO
+
+        #if request.form.get("measurement" == "kilometers"):
+            #radius = (1000 * (float(request.form.get("distance")) / 2))
+        #elif request.form.get("measurement" == "miles"):
+            #radius = (1000 * ((1.60934 * float(request.form.get("distance"))) / 2))
 
         # Create variable radius = distance/2
-        ### TODO
-        radius = request.form.get("distance")
+        radius = (1000 * (float(request.form.get("distance")) / 2))
+
 
         # Display map with circle of radius around location
-        flash("Let's Go!")
-        return render_template("geolocation.html")
+        flash('Drag marker B to a point within the Circle to get directions to a point')
+        return render_template("geolocation2.html", distance=radius)
 
     # GET
     else:
