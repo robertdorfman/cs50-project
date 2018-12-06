@@ -1,1 +1,1 @@
-web: gunicorn cs50-project.wsgi
+web: gunicorn cirqitous.wsgi
