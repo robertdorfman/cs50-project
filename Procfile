@@ -1,1 +1,1 @@
-web: gunicorn hello:app --preload
+web: gunicorn cs50-project.wsgi
