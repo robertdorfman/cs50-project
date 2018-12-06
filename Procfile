@@ -1,1 +1,1 @@
-web: gunicorn ./application.py.wsgi
+web: gunicorn ./application.py runserver 0.0.0.0:$PORT
